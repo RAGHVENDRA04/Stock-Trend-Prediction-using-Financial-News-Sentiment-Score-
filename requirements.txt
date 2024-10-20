@@ -1,0 +1,9 @@
+Flask
+pandas
+numpy
+matplotlib
+scikit-learn
+yfinance
+vaderSentiment
+beautifulsoup4
+requests
