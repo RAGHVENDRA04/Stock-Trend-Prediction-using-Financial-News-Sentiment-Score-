@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">Stock Predictor</a>
+    </nav>
+
+    <div class="content result-page">
+        <h1>Prediction Result</h1>
+        <div class="result-container">
+            <img src="{{ url_for('static', filename='prediction_plot.png') }}" alt="Prediction Plot" class="result-image">
+            <div class="result-text">
+                <p>{{ result }}</p>
+            </div>
+        </div>
+        <a href="/" class="btn">Back to Home</a>
+    </div>
+</body>
+</html>

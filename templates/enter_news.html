@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter News</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/enter_news.css') }}">
+</head>
+<body class="enter-news-body">
+    <div class="container">
+        <div id="instructions">
+            <h1>How to Enter News for Stocks from Mint Website</h1>
+            <h2>Step-by-Step Instructions:</h2>
+            <ol>
+                <li>Scroll Down and Click on "View Live Blog"</li>
+                <li>Open the provided link for each stock.</li>
+                <li>Scroll down the page until you find the "View Live Blog" button.</li>
+                <li>Click on this button to access the latest news and updates.</li>
+                <li>Copy the Page Link
+                    <ul>
+                        <li>Once the live blog is open, copy the URL from the address bar of your browser.</li>
+                    </ul>
+                </li>
+                <li>Paste the Link
+                    <ul>
+                        <li>Paste the copied link into your website or document as required.</li>
+                    </ul>
+                </li>
+            </ol>
+            <h2>Links to Access Live Blog for Stocks:</h2>
+            <ul>
+                <li><strong>Tata Power</strong> - <a href="https://www.livemint.com/market/stock-market-news/tata-power-share-price" target="_blank">Tata Power Share Price</a></li>
+                <li><strong>Reliance Power</strong> - <a href="https://www.livemint.com/market/stock-market-news/reliance-power-share-price" target="_blank">Reliance Power Share Price</a></li>
+                <li><strong>JSW Steel</strong> - <a href="https://www.livemint.com/market/stock-market-news/jsw-steel-share-price" target="_blank">JSW Steel Share Price</a></li>
+            </ul>
+        </div>
+
+        <h1>Enter News for {{ model_name }}</h1>
+        <form action="/update_news" method="post" id="news-form">
+            <input type="hidden" name="model_name" value="{{ model_name }}">
+            
+            <h2>Enter News Content</h2>
+            <div id="day-forms">
+                <!-- Day 1 input fields -->
+                <div class="day-form" id="day-1">
+                    <h3>Day 1</h3>
+                    <div class="form-group">
+                        <label for="title_0">Title 1:</label>
+                        <input type="text" name="title_0" id="title_0">
+                    </div>
+                    <div class="form-group">
+                        <label for="date_0">Date 1:</label>
+                        <input type="date" name="date_0" id="date_0">
+                    </div>
+                    <div class="form-group">
+                        <label for="content_0">Content 1:</label>
+                        <textarea name="content_0" id="content_0"></textarea>
+                    </div>
+                    <button type="button" onclick="showNextDay(2)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Submit buttons -->
+            <div class="button-group">
+                <!-- Add the Update News Button here -->
+                <input type="submit" value="Update News" id="update-btn" class="btn btn-primary">
+            </div>
+        </form>
+
+        <div id="final-message" style="display: none;">
+            <h1>Here We Go!</h1>
+            <p>According to your news, this will affect your stock for the next 7 days. Happy Trading!</p>
+            <button onclick="document.getElementById('news-form').submit()">See Predictions</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentDay = 1;
+
+        function showNextDay(day) {
+            if (day <= 7) {
+                const currentForm = document.getElementById('day-' + currentDay);
+                currentForm.style.display = 'none';
+                currentDay = day;
+                const nextForm = document.createElement('div');
+                nextForm.className = 'day-form';
+                nextForm.id = 'day-' + day;
+                nextForm.innerHTML = `
+                    <h3>Day ${day}</h3>
+                    <div class="form-group">
+                        <label for="title_${day-1}">Title ${day}:</label>
+                        <input type="text" name="title_${day-1}" id="title_${day-1}">
+                    </div>
+                    <div class="form-group">
+                        <label for="date_${day-1}">Date ${day}:</label>
+                        <input type="date" name="date_${day-1}" id="date_${day-1}">
+                    </div>
+                    <div class="form-group">
+                        <label for="content_${day-1}">Content ${day}:</label>
+                        <textarea name="content_${day-1}" id="content_${day-1}"></textarea>
+                    </div>
+                    ${day < 7 ? `<button type="button" onclick="showNextDay(${day + 1})">Next</button>` : `<button type="button" onclick="showFinalMessage()">Finish</button>`}
+                `;
+                document.getElementById('day-forms').appendChild(nextForm);
+            }
+        }
+
+        function showFinalMessage() {
+            document.getElementById('day-' + currentDay).style.display = 'none';
+            document.getElementById('final-message').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

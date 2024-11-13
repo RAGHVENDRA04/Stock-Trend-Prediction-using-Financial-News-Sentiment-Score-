@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter News Manually</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/enter_news.css') }}">
+</head>
+<body class="enter-news-body">
+    <div class="container">
+        <h1>Enter News for {{ model_name }}</h1>
+        <form action="/predict" method="post" id="news-form">
+            <input type="hidden" name="model_name" value="{{ model_name }}">
+            <h2>Enter News Content</h2>
+            <div id="day-forms">
+                <div class="day-form" id="day-1">
+                    <h3>Day 1</h3>
+                    <div class="form-group">
+                        <label for="title_0">Title 1:</label>
+                        <input type="text" name="title_0" id="title_0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date_0">Date 1:</label>
+                        <input type="date" name="date_0" id="date_0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content_0">Content 1:</label>
+                        <textarea name="content_0" id="content_0" required></textarea>
+                    </div>
+                    <button type="button" onclick="showNextDay(2)">Next</button>
+                </div>
+            </div>
+            <input type="submit" value="Predict" id="submit-btn" style="display: none;">
+        </form>
+        <div id="final-message" style="display: none;">
+            <h1>Here We Go!</h1>
+            <p>According to your news, this will affect your stock for the next 7 days. Happy Trading!</p>
+            <button onclick="document.getElementById('news-form').submit()">See Predictions</button>
+        </div>
+    </div>
+    <script>
+        let currentDay = 1;
+        function showNextDay(day) {
+            if (day <= 7) {
+                const currentForm = document.getElementById(`day-${currentDay}`);
+                currentForm.style.display = 'none';
+                currentDay = day;
+                const nextForm = document.createElement('div');
+                nextForm.className = 'day-form';
+                nextForm.id = `day-${day}`;
+                nextForm.innerHTML = `
+                    <h3>Day ${day}</h3>
+                    <div class="form-group">
+                        <label for="title_${day-1}">Title ${day}:</label>
+                        <input type="text" name="title_${day-1}" id="title_${day-1}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date_${day-1}">Date ${day}:</label>
+                        <input type="date" name="date_${day-1}" id="date_${day-1}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content_${day-1}">Content ${day}:</label>
+                        <textarea name="content_${day-1}" id="content_${day-1}" required></textarea>
+                    </div>
+                    ${day < 7 ? `<button type="button" onclick="showNextDay(${day + 1})">Next</button>` : `<button type="button" onclick="showFinalMessage()">Finish</button>`}
+                `;
+                document.getElementById('day-forms').appendChild(nextForm);
+            }
+        }
+        function showFinalMessage() {
+            document.getElementById(`day-${currentDay}`).style.display = 'none';
+            document.getElementById('final-message').style.display = 'block';
+            document.getElementById('submit-btn').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
