@@ -89,20 +89,6 @@ The project uses:
 
 ---
 
-## 📂 Directory Structure
-
-├── app/ # Flask backend and routes
-├── model/ # Trained MLP Regressor
-├── data/ # Stock and sentiment datasets
-├── utils/ # Feature engineering, sentiment analyzer
-├── templates/ # HTML files for UI
-├── Dockerfile
-├── requirements.txt
-├── README.md
-
-yaml
-Copy
-Edit
 
 ---
 
