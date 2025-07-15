@@ -1,75 +1,153 @@
-# Stock-Trend-Prediction-using-Financial-News-Sentiment-Score-
-Machine learning model predicting stock prices by integrating sentiment analysis of financial news with historical stock data. Utilizes VADER for sentiment scoring, MLP for trend prediction, and web scraping for real-time news updates. Achieves a 72 accuracy for stock trends over 7 days.
+# 📈 Stock Trend Prediction using Financial News Sentiment Score  
+> ML-powered forecasting system that integrates real-time news sentiment and historical stock data for stock price prediction.
 
-Project Overview: This project integrates sentiment analysis of news articles with historical stock data to predict the closing prices of Reliance Power’s stock. By leveraging NLP techniques and machine learning, the objective was to create a model that could anticipate stock price movements based on sentiment derived from relevant news. The approach demonstrates how sentiment analysis can enhance the predictive capabilities of financial models.
+![Python](https://img.shields.io/badge/python-3.10-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-Production--Ready-brightgreen)
+![Deployment](https://img.shields.io/badge/deployed-Vercel%20%7C%20Render-blue)
 
-Steps Involved:
+---
 
-Data Collection:
+## 🧠 Overview
 
-Stock Price Data:
-Source: Yahoo Finance (using the yfinance library).
-Data period: August 29, 2023, to the present.
-Columns utilized: Date, Open, High, Low, Close, Adjusted Close, and Volume.
-News and Sentiment Data:
-News updates were obtained from the LiveMint website.
-Sentiment analysis was performed using VADER, generating scores ranging from -1 to 1.
-Data collected: 764 rows with columns such as Title, Date, and Content.
-Data Preprocessing:
+This project demonstrates an end-to-end machine learning pipeline that predicts stock prices by combining sentiment analysis of financial news with historical market data. A Multi-Layer Perceptron (MLP) Regressor is trained on engineered features to forecast trends and visualize price movement over the next 7 days.
 
-The stock data was cleaned, null values removed, and normalized using Min-Max scaling.
-Sentiment data was aggregated over 7-day windows for better analysis.
-Data Merging & Feature Engineering:
+The project uses:
+- Real-time web scraping (LiveMint, MoneyControl)
+- Sentiment analysis using VADER
+- Stock data from Yahoo Finance (`yfinance`)
+- Feature engineering with technical indicators (support/resistance)
+- MLP model for predictions
+- MongoDB Atlas for data storage
+- Flask + Docker for deployment
 
-Stock data was merged with sentiment data based on the Date column.
-New columns like Previous Close, Price Change, and Sentiment Label were introduced.
-Feature selection: Previous Close, Sentiment, Support, and Resistance values were used.
-Target: Closing prices.
-Model Training:
+---
 
-The dataset was split into training and testing sets using an 80-20 ratio.
-An MLP (Multi-Layer Perceptron) Regressor was trained on the features.
-Evaluation metrics used were Mean Squared Error (MSE), Mean Absolute Error (MAE), and R-squared (R²).
-Prediction:
+## 🚀 Features
 
-The model was used to predict stock prices for the next 7 days.
-The results showed a highest accuracy of 72%, with actual versus predicted price change visualized.
-Saving the Model:
+- ✅ Live news scraping via BeautifulSoup/Selenium
+- ✅ VADER sentiment scoring with compound score (-1 to 1)
+- ✅ yFinance-based stock price collection (Open, Close, High, Low)
+- ✅ Data cleaning, normalization, Min-Max scaling
+- ✅ Feature engineering: Previous Close, Price Change, Support/Resistance
+- ✅ MLP Regressor with evaluation metrics: MSE, MAE, R²
+- ✅ MongoDB Atlas for storing predictions/logs
+- ✅ Visualization with Matplotlib
+- ✅ Flask web interface
+- ✅ Docker-ready deployment with Render & Vercel
 
-The trained MLP Regressor was saved as a pickle file for future use.
-Predictions were saved into CSV files for analysis.
-Evaluation Results:
+---
 
-The MSE, MAE, and R-squared metrics provided insights into the model's accuracy and performance.
-The model achieved an accuracy of 0.72, indicating good predictive power but room for improvement.
-Support and Resistance Levels:
+## 🧪 Workflow
 
-The stock data was further analyzed to calculate support and resistance levels using rolling windows, which provided insights into price trends.
-Final Dataset Description:
+1. **Data Collection**  
+   - Scrapes news from LiveMint, MoneyControl  
+   - Pulls stock data using `yfinance`
 
-Stock Price Data Size: 1.6 MB.
-News Sentiment Data Size: 4.2 MB (with 764 rows).
-Final Merged Dataset Size: 16 KB with 7 rows, including Date, Predicted Close, and Predicted Price Change.
-Tools & Libraries Used:
+2. **Preprocessing & Sentiment Analysis**  
+   - Applies VADER sentiment scoring  
+   - Aggregates sentiment on 7-day rolling window  
+   - Cleans and normalizes data
 
-Web Scraping: BeautifulSoup, Selenium for gathering live news updates.
-Data Handling: Pandas, NumPy for processing and manipulation.
-Visualization: Matplotlib for plotting stock trends and sentiment analysis results.
-ML Model: MLPRegressor from the scikit-learn library.
-Sentiment Analysis: VADER for sentiment scoring of news articles.
-This project highlights how combining real-time sentiment analysis from news articles with stock price data can improve predictive models in financial markets. By utilizing various machine learning techniques and performing extensive data preprocessing, the project was able to capture market dynamics influenced by sentiment, achieving a respectable prediction accuracy.
+3. **Feature Engineering**  
+   - Merges sentiment and stock data  
+   - Adds Previous Close, Price Change, Support, Resistance
 
+4. **Model Training**  
+   - Trains MLP Regressor using scikit-learn  
+   - Evaluates using MSE, MAE, R²
 
+5. **Prediction & Visualization**  
+   - Forecasts next 7-day stock trends  
+   - Plots actual vs predicted data
 
+6. **Deployment**  
+   - Dockerized Flask API  
+   - Deployed using Vercel + Render  
+   - MongoDB Atlas stores predictions
 
+---
 
-![Stock Prediction System Architecture_page-0001](https://github.com/user-attachments/assets/406615be-59c2-4fd4-af01-3226585de9fb)
+## 📊 Results
 
+| Metric         | Value       |
+|----------------|-------------|
+| R² Score       | 0.72        |
+| MAE            | 14.21       |
+| MSE            | 308.77      |
 
+---
 
+## 🧰 Tech Stack
 
+- **Languages:** Python, HTML, CSS, JavaScript  
+- **ML & NLP:** Scikit-learn, VADER, NumPy, Pandas  
+- **Web Scraping:** BeautifulSoup, Selenium  
+- **Deployment:** Flask, Docker, Vercel, Render  
+- **Database:** MongoDB Atlas  
+- **Visualization:** Matplotlib  
 
-![Stock Prediction System Architecture_page-0002](https://github.com/user-attachments/assets/4f20befe-995c-4b1f-a0b4-d79498bbd83a)
+---
 
+## 📂 Directory Structure
 
+├── app/ # Flask backend and routes
+├── model/ # Trained MLP Regressor
+├── data/ # Stock and sentiment datasets
+├── utils/ # Feature engineering, sentiment analyzer
+├── templates/ # HTML files for UI
+├── Dockerfile
+├── requirements.txt
+├── README.md
 
+yaml
+Copy
+Edit
+
+---
+
+## 🧠 Resume-Aligned Highlights
+
+- Integrated **real-time financial sentiment** with stock forecasting  
+- Trained and deployed a **neural network model (MLP)** for time-series prediction  
+- Calculated **support/resistance levels** for technical market analysis  
+- Used **MongoDB Atlas** to manage over 1 lakh+ financial records  
+- Deployed on **Render + Vercel** using Docker  
+- Built with **modular architecture** and tested under multi-user load  
+
+---
+
+## 🔮 Future Enhancements
+
+- [ ] Add LSTM for temporal forecasting  
+- [ ] Integrate finBERT for domain-specific sentiment  
+- [ ] Add Twitter-based sentiment scraping  
+- [ ] Enable email alerts for high-confidence predictions  
+- [ ] Real-time chart dashboard with user watchlists
+
+---
+
+## 📁 Missing Files Notice
+
+Some model files (`.pkl`), datasets, or API keys may be excluded due to size or security policies. Use the report and available codebase for testing and replication.
+
+---
+
+## 📜 Report
+
+👉 Full technical documentation and project report is available in the repository under `Project Report.pdf`.
+
+---
+
+## 👨‍💻 Author
+
+**Raghvendra Singh**  
+📍 Pune, India  
+📧 [raghvendrarajivasingh07@gmail.com](mailto:raghvendrarajivasingh07@gmail.com)  
+🔗 [LinkedIn Profile](https://linkedin.com/in/Raghvendra-Singh04)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
