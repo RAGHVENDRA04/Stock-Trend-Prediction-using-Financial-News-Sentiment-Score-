@@ -134,25 +134,17 @@ Some model files (`.pkl`), datasets, or API keys may be excluded due to size or 
 
 ---
 
+---
 
 
 
+![Stock Prediction System Architecture_page-0001](https://github.com/user-attachments/assets/e816aecf-e885-4ed3-8f5f-7d69fda7694b)
 
 
-
-![Uploading Stock Prediction System Architecture_page-0001.jpg…]()
-
+![Stock Prediction System Architecture_page-0002](https://github.com/user-attachments/assets/d3b806d0-926d-4fdc-abb5-35c6a52a164a)
 
 
-
-
-
-
-![Uploading Stock Prediction System Architecture_page-0002.jpg…]()
-
-
-
-
+---
 
 
 
