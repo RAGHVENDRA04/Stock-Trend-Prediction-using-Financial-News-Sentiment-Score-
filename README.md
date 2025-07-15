@@ -1,4 +1,4 @@
-# Stock-Trend-Prediction-using-Financial-News-Sentiment-Score-
+![Stock Prediction System Architecture_page-0001](https://github.com/user-attachments/assets/c8d5857e-6444-476d-9a55-168a98312d81)# Stock-Trend-Prediction-using-Financial-News-Sentiment-Score-
 Machine learning model predicting stock prices by integrating sentiment analysis of financial news with historical stock data. Utilizes VADER for sentiment scoring, MLP for trend prediction, and web scraping for real-time news updates. Achieves a 72 accuracy for stock trends over 7 days.
 
 Project Overview: This project integrates sentiment analysis of news articles with historical stock data to predict the closing prices of Reliance Power’s stock. By leveraging NLP techniques and machine learning, the objective was to create a model that could anticipate stock price movements based on sentiment derived from relevant news. The approach demonstrates how sentiment analysis can enhance the predictive capabilities of financial models.
@@ -58,3 +58,18 @@ Visualization: Matplotlib for plotting stock trends and sentiment analysis resul
 ML Model: MLPRegressor from the scikit-learn library.
 Sentiment Analysis: VADER for sentiment scoring of news articles.
 This project highlights how combining real-time sentiment analysis from news articles with stock price data can improve predictive models in financial markets. By utilizing various machine learning techniques and performing extensive data preprocessing, the project was able to capture market dynamics influenced by sentiment, achieving a respectable prediction accuracy.
+
+
+
+
+
+![Stock Prediction System Architecture_page-0001](https://github.com/user-attachments/assets/406615be-59c2-4fd4-af01-3226585de9fb)
+
+
+
+
+
+![Stock Prediction System Architecture_page-0002](https://github.com/user-attachments/assets/4f20befe-995c-4b1f-a0b4-d79498bbd83a)
+
+
+
