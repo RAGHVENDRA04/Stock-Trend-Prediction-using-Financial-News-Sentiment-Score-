@@ -134,6 +134,4 @@ Some model files (`.pkl`), datasets, or API keys may be excluded due to size or 
 
 ---
 
-## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
