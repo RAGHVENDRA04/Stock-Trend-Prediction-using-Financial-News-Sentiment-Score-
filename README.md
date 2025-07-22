@@ -1,4 +1,4 @@
-# 📈 Stock Trend Prediction using Financial News Sentiment Score  
+#  Stock Trend Prediction using Financial News Sentiment Score  
 > ML-powered forecasting system that integrates real-time news sentiment and historical stock data for stock price prediction.
 
 ![Python](https://img.shields.io/badge/python-3.10-blue.svg)
