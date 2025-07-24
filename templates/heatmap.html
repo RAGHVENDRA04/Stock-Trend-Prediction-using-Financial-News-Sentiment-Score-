@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sentiment Heatmap</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <style>
+    .cell {
+      stroke: #fff;
+      stroke-width: 2px;
+    }
+    .tooltip {
+      position: absolute;
+      text-align: center;
+      background: #333;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      pointer-events: none;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: none;">
+    <h2 style="margin-bottom: 32px; font-size: 2.2em; font-weight: 700; color: #22223b; text-align: center;">Sentiment Score Heatmap (Last 7 Days)</h2>
+    <div id="heatmap" style="display: flex; justify-content: center; align-items: center;"></div>
+  </div>
+
+  <script>
+    const cellSize = 50;
+    const margin = { top: 40, right: 20, bottom: 60, left: 80 };
+    const tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+
+    fetch("/api/sentiment-heatmap")
+      .then(res => res.json())
+      .then(json => {
+        const data = json.data;
+        if (!data || data.length === 0) {
+          d3.select("#heatmap").append("div").text("No sentiment data available.").style("color", "#b91c1c").style("font-size", "1.2em");
+          return;
+        }
+        const stocks = Array.from(new Set(data.map(d => d.stock)));
+        const dates = Array.from(new Set(data.map(d => d.date))).sort();
+
+        const width = margin.left + margin.right + cellSize * dates.length;
+        const height = margin.top + margin.bottom + cellSize * stocks.length;
+
+        const svg = d3.select("#heatmap")
+          .append("svg")
+          .attr("width", width)
+          .attr("height", height);
+
+        const colorScale = d3.scaleSequential(d3.interpolateRdYlGn)
+          .domain([-1, 1]);
+
+        data.forEach(d => {
+          d.x = dates.indexOf(d.date);
+          d.y = stocks.indexOf(d.stock);
+        });
+
+        svg.selectAll(".cell")
+          .data(data)
+          .enter()
+          .append("rect")
+          .attr("class", "cell")
+          .attr("x", d => margin.left + d.x * cellSize)
+          .attr("y", d => margin.top + d.y * cellSize)
+          .attr("width", cellSize)
+          .attr("height", cellSize)
+          .attr("fill", d => colorScale(d.sentiment))
+          .on("mouseover", (event, d) => {
+            tooltip.transition().duration(200).style("opacity", 0.9);
+            tooltip.html(`${d.stock} (${d.date})<br>Sentiment: ${d.sentiment}`)
+              .style("left", (event.pageX + 10) + "px")
+              .style("top", (event.pageY - 20) + "px");
+          })
+          .on("mouseout", () => tooltip.transition().duration(500).style("opacity", 0));
+
+        // Y axis (stock labels)
+        svg.selectAll(".stock-label")
+          .data(stocks)
+          .enter()
+          .append("text")
+          .attr("x", margin.left - 10)
+          .attr("y", (_, i) => margin.top + i * cellSize + cellSize / 2)
+          .text(d => d)
+          .attr("alignment-baseline", "middle")
+          .attr("text-anchor", "end")
+          .attr("font-size", "1.1em");
+
+        // X axis (date labels)
+        svg.selectAll(".date-label")
+          .data(dates)
+          .enter()
+          .append("text")
+          .attr("x", (_, i) => margin.left + i * cellSize + cellSize / 2)
+          .attr("y", margin.top + stocks.length * cellSize + 24)
+          .text(d => d)
+          .attr("text-anchor", "middle")
+          .attr("font-size", "1.1em");
+      });
+  </script>
+</body>
+</html>

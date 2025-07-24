@@ -194,6 +194,32 @@ def get_merged_df(model_name):
     except Exception as e:
         print(f"Error merging dataframes: {e}")
         return None
+# heatmap
+@app.route('/api/sentiment-heatmap')
+def sentiment_heatmap():
+    stock_models = ['tata', 'rpower', 'jswsteel']
+    heatmap_data = []
+
+    for model in stock_models:
+        df = load_news_data(model)
+        if df is not None and not df.empty:
+            # Group by date and get mean sentiment
+            grouped = df.groupby(df['Date'].dt.date)['Sentiment'].mean().reset_index()
+            # Sort by date descending and take last 7 days
+            grouped = grouped.sort_values('Date', ascending=False).head(7)
+            # Sort again ascending for display
+            grouped = grouped.sort_values('Date')
+            for _, row in grouped.iterrows():
+                heatmap_data.append({
+                    'stock': model.upper(),
+                    'date': row['Date'].strftime('%Y-%m-%d'),
+                    'sentiment': round(row['Sentiment'], 3)
+                })
+
+    return {'data': heatmap_data}
+
+
+
 
 @app.route('/')
 def index():
@@ -262,11 +288,17 @@ def predict():
 
     last_7_days = merged_df.iloc[-7:][['Previous_Close', 'Sentiment', 'Support', 'Resistance']].values
 
+    if last_7_days.shape[0] == 0:
+        return render_template('result.html', result="Not enough data to make predictions. Please ensure there is sufficient historical data.")
+
     predicted_close_prices = []
     predicted_price_changes = []
 
     for i in range(7):
         X_next_day = pd.DataFrame(last_7_days, columns=['Previous_Close', 'Sentiment', 'Support', 'Resistance'])
+        # Defensive: check if X_next_day has at least one row
+        if X_next_day.shape[0] == 0:
+            return render_template('result.html', result="Not enough data to make predictions. Please ensure there is sufficient historical data.")
         next_day_close = mlp_model.predict(X_next_day.iloc[[-1]])[0]
 
         predicted_close_prices.append(next_day_close)
@@ -320,6 +352,12 @@ def predict():
         plot_path = None
 
     return render_template('result.html', result="Prediction complete", plot_path=plot_path)
+
+
+@app.route('/heatmap')
+def heatmap():
+    return render_template('heatmap.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
