@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Enter News</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/enter_news.css') }}">
+    <!-- Use main Groww-inspired style -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="enter-news-body">
     <div class="container">
@@ -37,71 +38,72 @@
         <form action="/update_news" method="post" id="news-form">
             <input type="hidden" name="model_name" value="{{ model_name }}">
             
-            <h2>Enter News Content</h2>
+    <div class="navbar">
+        <a class="navbar-brand" href="/">Stock Trend Predictor</a>
+    </div>
+    <div class="content" style="max-width: 650px; margin-top: 80px;">
+        <div style="background: rgba(255,255,255,0.7); border-radius: 18px; box-shadow: 0 8px 32px 0 rgba(44,62,80,0.13); padding: 32px 28px 24px 28px; margin-bottom: 32px;">
+            <h1 style="font-size:2.1em; font-weight:800; margin-bottom:18px; text-align:center; color:#1a1a1a;">How to Enter News for Stocks from Mint Website</h1>
+            <h2 style="font-size:1.3em; font-weight:700; color:#00b386; margin-bottom:10px; text-align:center;">Step-by-Step Instructions</h2>
+            <ol style="margin-bottom:18px;">
+                <li>Scroll Down and Click on <b>"View Live Blog"</b></li>
+                <li>Open the provided link for each stock.</li>
+                <li>Scroll down the page until you find the <b>"View Live Blog"</b> button.</li>
+                <li>Click on this button to access the latest news and updates.</li>
+                <li>Copy the Page Link
+                    <ul>
+                        <li>Once the live blog is open, copy the URL from the address bar of your browser.</li>
+                    </ul>
+                </li>
+                <li>Paste the Link
+                    <ul>
+                        <li>Paste the copied link into your website or document as required.</li>
+                    </ul>
+                </li>
+            </ol>
+            <h2 style="font-size:1.1em; font-weight:700; color:#38bdf8; margin-bottom:8px; text-align:center;">Links to Access Live Blog for Stocks</h2>
+            <ul style="margin-bottom:0;">
+                <li><strong>Tata Power</strong> - <a href="https://www.livemint.com/market/stock-market-news/tata-power-share-price" target="_blank" style="color:#00b386;">Tata Power Share Price</a></li>
+                <li><strong>Reliance Power</strong> - <a href="https://www.livemint.com/market/stock-market-news/reliance-power-share-price" target="_blank" style="color:#00b386;">Reliance Power Share Price</a></li>
+                <li><strong>JSW Steel</strong> - <a href="https://www.livemint.com/market/stock-market-news/jsw-steel-share-price" target="_blank" style="color:#00b386;">JSW Steel Share Price</a></li>
+            </ul>
+        </div>
+
+        <h1 style="font-size:2em; font-weight:800; margin-bottom:18px; text-align:center; color:#1a1a1a;">Enter News for {{ model_name }}</h1>
+        <form action="/update_news" method="post" id="news-form" style="margin:0 auto;">
+            <input type="hidden" name="model_name" value="{{ model_name }}">
+            <h2 style="font-size:1.2em; font-weight:700; color:#00b386; margin-bottom:10px; text-align:center;">Enter News Content</h2>
             <div id="day-forms">
                 <!-- Day 1 input fields -->
-                <div class="day-form" id="day-1">
-                    <h3>Day 1</h3>
+                <div class="day-form" id="day-1" style="background:rgba(255,255,255,0.85); border-radius:14px; box-shadow:0 2px 12px 0 rgba(44,62,80,0.07); padding:18px 18px 10px 18px; margin-bottom:18px;">
+                    <h3 style="font-size:1.1em; font-weight:700; color:#38bdf8; margin-bottom:10px;">Day 1</h3>
                     <div class="form-group">
                         <label for="title_0">Title 1:</label>
-                        <input type="text" name="title_0" id="title_0">
+                        <input type="text" name="title_0" id="title_0" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="date_0">Date 1:</label>
-                        <input type="date" name="date_0" id="date_0">
+                        <input type="date" name="date_0" id="date_0" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="content_0">Content 1:</label>
-                        <textarea name="content_0" id="content_0"></textarea>
+                        <textarea name="content_0" id="content_0" class="form-control"></textarea>
                     </div>
-                    <button type="button" onclick="showNextDay(2)">Next</button>
+                    <button type="button" class="btn" style="width:100%;" onclick="showNextDay(2)">Next</button>
                 </div>
             </div>
-            
             <!-- Submit buttons -->
-            <div class="button-group">
-                <!-- Add the Update News Button here -->
-                <input type="submit" value="Update News" id="update-btn" class="btn btn-primary">
+            <div class="button-group" style="text-align:center;">
+                <input type="submit" value="Update News" id="update-btn" class="btn btn-primary" style="width:60%; margin-top:10px;">
             </div>
         </form>
 
-        <div id="final-message" style="display: none;">
-            <h1>Here We Go!</h1>
-            <p>According to your news, this will affect your stock for the next 7 days. Happy Trading!</p>
-            <button onclick="document.getElementById('news-form').submit()">See Predictions</button>
+        <div id="final-message" style="display: none; text-align:center; margin-top:24px;">
+            <h1 style="font-size:2em; font-weight:800; color:#00b386;">Here We Go!</h1>
+            <p style="font-size:1.15em; color:#1a1a1a;">According to your news, this will affect your stock for the next 7 days. Happy Trading!</p>
+            <button class="btn" style="width:60%; background:linear-gradient(90deg,#38bdf8 0%,#00b386 100%); margin-top:10px;" onclick="document.getElementById('news-form').submit()">See Predictions</button>
         </div>
     </div>
-    
-    <script>
-        let currentDay = 1;
-
-        function showNextDay(day) {
-            if (day <= 7) {
-                const currentForm = document.getElementById('day-' + currentDay);
-                currentForm.style.display = 'none';
-                currentDay = day;
-                const nextForm = document.createElement('div');
-                nextForm.className = 'day-form';
-                nextForm.id = 'day-' + day;
-                nextForm.innerHTML = `
-                    <h3>Day ${day}</h3>
-                    <div class="form-group">
-                        <label for="title_${day-1}">Title ${day}:</label>
-                        <input type="text" name="title_${day-1}" id="title_${day-1}">
-                    </div>
-                    <div class="form-group">
-                        <label for="date_${day-1}">Date ${day}:</label>
-                        <input type="date" name="date_${day-1}" id="date_${day-1}">
-                    </div>
-                    <div class="form-group">
-                        <label for="content_${day-1}">Content ${day}:</label>
-                        <textarea name="content_${day-1}" id="content_${day-1}"></textarea>
-                    </div>
-                    ${day < 7 ? `<button type="button" onclick="showNextDay(${day + 1})">Next</button>` : `<button type="button" onclick="showFinalMessage()">Finish</button>`}
-                `;
-                document.getElementById('day-forms').appendChild(nextForm);
-            }
-        }
 
         function showFinalMessage() {
             document.getElementById('day-' + currentDay).style.display = 'none';
