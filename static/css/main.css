@@ -3,29 +3,42 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+    color: #22223b;
 }
 
 /* Background and container styles for the Main Selection page */
 .select-option-body {
-    background: linear-gradient(to right, #e3f2fd, #bbdefb);
+    background: rgba(255,255,255,0.35);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-    overflow-y: auto; /* Ensure scrolling is possible */
+    overflow-y: auto;
 }
 
 .container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(255,255,255,0.85);
+    padding: 32px 28px 28px 28px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
     max-width: 600px;
     width: 100%;
     text-align: center;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: box-shadow 0.3s;
+    animation: fadeIn 1.2s cubic-bezier(.39,.575,.56,1) both;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 h1 {
@@ -42,16 +55,23 @@ h1 {
 
 .button {
     display: block;
-    padding: 10px 20px;
-    font-size: 1.2em;
-    background-color: #007BFF;
-    color: white;
+    padding: 12px 28px;
+    font-size: 1.15em;
+    background: linear-gradient(90deg, #7c3aed 0%, #38bdf8 100%);
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 2px 8px 0 rgba(124,58,237,0.08);
+    margin: 8px 0 0 0;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    outline: none;
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background: linear-gradient(90deg, #38bdf8 0%, #7c3aed 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px 0 rgba(56,189,248,0.13);
 }
