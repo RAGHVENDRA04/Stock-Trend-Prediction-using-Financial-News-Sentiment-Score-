@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 # Frontend & Backend Enhancements (July 2025)
 
@@ -130,4 +130,4 @@ Some model files (`.pkl`), datasets, or API keys may be excluded due to size or 
 
 
 
->>>>>>> 4f1282bed03a40b1d54e2b2e37d3712e25944330
+
