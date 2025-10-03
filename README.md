@@ -32,17 +32,17 @@ The project uses:
 
 ---
 
-## 🚀 Features
+##  Features
 
-- ✅ Live news scraping via BeautifulSoup/Selenium
-- ✅ VADER sentiment scoring with compound score (-1 to 1)
-- ✅ yFinance-based stock price collection (Open, Close, High, Low)
-- ✅ Data cleaning, normalization, Min-Max scaling
-- ✅ Feature engineering: Previous Close, Price Change, Support/Resistance
-- ✅ MLP Regressor with evaluation metrics: MSE, MAE, R²
-- ✅ Visualization with Matplotlib
-- ✅ Flask web interface
-- ✅ Docker-ready deployment with Render & Vercel
+-  Live news scraping via BeautifulSoup/Selenium
+-  VADER sentiment scoring with compound score (-1 to 1)
+-  yFinance-based stock price collection (Open, Close, High, Low)
+-  Data cleaning, normalization, Min-Max scaling
+-  Feature engineering: Previous Close, Price Change, Support/Resistance
+-  MLP Regressor with evaluation metrics: MSE, MAE, R²
+-  Visualization with Matplotlib
+-  Flask web interface
+-  Docker-ready deployment with Render & Vercel
 
 ---
 
