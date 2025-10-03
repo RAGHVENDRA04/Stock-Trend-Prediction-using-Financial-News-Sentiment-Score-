@@ -40,7 +40,6 @@ The project uses:
 - ✅ Data cleaning, normalization, Min-Max scaling
 - ✅ Feature engineering: Previous Close, Price Change, Support/Resistance
 - ✅ MLP Regressor with evaluation metrics: MSE, MAE, R²
-- ✅ MongoDB Atlas for storing predictions/logs
 - ✅ Visualization with Matplotlib
 - ✅ Flask web interface
 - ✅ Docker-ready deployment with Render & Vercel
