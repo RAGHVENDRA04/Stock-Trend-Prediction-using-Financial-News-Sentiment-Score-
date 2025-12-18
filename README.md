@@ -234,29 +234,6 @@ python-dotenv>=1.0.0
 plotly>=5.15.0
 ```
 
-### Environment Configuration
-
-Create a `.env` file in the root directory:
-
-```env
-# MongoDB Configuration
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/
-DATABASE_NAME=stock_prediction
-
-# Flask Configuration
-FLASK_ENV=production
-SECRET_KEY=your-secret-key-here
-DEBUG=False
-
-# API Keys (if needed)
-NEWS_API_KEY=your-news-api-key
-ALPHA_VANTAGE_KEY=your-alphavantage-key
-
-# Server Configuration
-HOST=0.0.0.0
-PORT=5000
-```
-
 ---
 
 ## 🚀 Running the Application
